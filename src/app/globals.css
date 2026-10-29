@@ -1,0 +1,159 @@
+/* ─── Google Fonts ─────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Design Tokens ─────────────────────────────────────────── */
+:root {
+  --gold: #E8A020;
+  --gold-light: #F5B731;
+  --gold-dim: rgba(232,160,32,0.15);
+  --surface: #0f0b09;
+  --surface-2: #15100d;
+  --surface-3: #1c1511;
+  --border: rgba(255,255,255,0.06);
+  --border-gold: rgba(232,160,32,0.25);
+  --text-primary: #f4ede6;
+  --text-secondary: #9d8878;
+  --text-muted: #5a4a3f;
+  --radius-card: 1.25rem;
+  --transition: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* ─── Base ────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: #09070604;
+  background-color: #090706;
+  color: var(--text-primary);
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ─── Selection ──────────────────────────────────────────────── */
+::selection {
+  background: rgba(232,160,32,0.3);
+  color: #fff;
+}
+
+/* ─── Custom Scrollbar ───────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #090706; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #2d2219, #E8A020);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+/* ─── Utility: Grain texture overlay ────────────────────────── */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 1;
+}
+
+/* ─── Glass Card Utility ─────────────────────────────────────── */
+.glass {
+  background: rgba(21,16,13,0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.glass-gold {
+  background: rgba(21,16,13,0.75);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(232,160,32,0.18);
+}
+
+/* ─── Gold shimmer text ──────────────────────────────────────── */
+.text-shimmer {
+  background: linear-gradient(90deg, #E8A020 0%, #F5D080 40%, #E8A020 60%, #C78B18 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+/* ─── Card hover lift ────────────────────────────────────────── */
+.card-lift {
+  transition: transform 0.35s cubic-bezier(0.34, 1.2, 0.64, 1),
+              box-shadow 0.35s ease,
+              border-color 0.25s ease;
+}
+.card-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px -12px rgba(0,0,0,0.7), 0 0 0 1px rgba(232,160,32,0.2);
+}
+
+/* ─── Button base ────────────────────────────────────────────── */
+.btn-gold {
+  background: linear-gradient(135deg, #E8A020 0%, #C78B18 100%);
+  color: #1c1108;
+  font-weight: 800;
+  border-radius: 0.875rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 16px rgba(232,160,32,0.3), inset 0 1px 0 rgba(255,255,255,0.15);
+}
+.btn-gold:hover {
+  background: linear-gradient(135deg, #F5B731 0%, #E8A020 100%);
+  box-shadow: 0 8px 24px rgba(232,160,32,0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+  transform: translateY(-1px);
+}
+.btn-gold:active { transform: translateY(0) scale(0.98); }
+
+/* ─── Section divider glow ───────────────────────────────────── */
+.section-glow {
+  background: radial-gradient(ellipse 60% 1px at 50% 0%, rgba(232,160,32,0.35) 0%, transparent 70%);
+}
+
+/* ─── Floating badge ─────────────────────────────────────────── */
+.badge-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.3rem 0.875rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: rgba(232,160,32,0.12);
+  border: 1px solid rgba(232,160,32,0.3);
+  color: #E8A020;
+}
+
+/* ─── RTL Pashto font ────────────────────────────────────────── */
+[dir="rtl"] {
+  font-family: "Segoe UI", "Tahoma", "Arial", system-ui, sans-serif;
+}
+
+/* ─── Scroll-reveal placeholder (JS-less fallback) ──────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
